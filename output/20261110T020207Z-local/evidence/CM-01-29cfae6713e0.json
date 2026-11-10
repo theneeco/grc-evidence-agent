@@ -1,0 +1,38 @@
+{
+  "api_call": "GET /repos/{owner}/{repo}/branches/{branch}/protection",
+  "collected_at": "2026-11-10T02:08:25+00:00",
+  "control_id": "CM-01",
+  "data": [
+    {
+      "default_branch": "main",
+      "production": true,
+      "protection": {
+        "allow_force_push": false,
+        "dismiss_stale_reviews": true,
+        "required_reviews": 2
+      },
+      "repo": "acme/payments-api"
+    },
+    {
+      "default_branch": "main",
+      "production": true,
+      "protection": {
+        "allow_force_push": false,
+        "dismiss_stale_reviews": true,
+        "required_reviews": 1
+      },
+      "repo": "acme/web-frontend"
+    },
+    {
+      "default_branch": "main",
+      "production": true,
+      "protection": {
+        "allow_force_push": false,
+        "dismiss_stale_reviews": true,
+        "required_reviews": 1
+      },
+      "repo": "acme/infra-terraform"
+    }
+  ],
+  "source_system": "GitHub (simulated)"
+}

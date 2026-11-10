@@ -1,0 +1,197 @@
+{
+  "AC-01": {
+    "control_id": "AC-01",
+    "title": "MFA enforced for all active users",
+    "frameworks": [
+      "ISO27001:2022 A.5.17",
+      "ISO27001:2022 A.8.5",
+      "SOC2 CC6.1"
+    ],
+    "owner": "iam-team@acme.example",
+    "result": "FAIL",
+    "summary": "Two active users (a***@acme.example, s***@acme.example) lack MFA factors. The ticket IT-881 references s***@acme.example as a service account but lacks explicit MFA exception documentation.",
+    "failing_items": [
+      "anita.rao@acme.example",
+      "svc-backup@acme.example"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "AC-01-465c6f1099b9",
+        "control_id": "AC-01",
+        "file": "AC-01-465c6f1099b9.json",
+        "sha256": "465c6f1099b90ba286f59f3ddafa05df50d66a14005da0abac40ae27f80f3ae7",
+        "collected_at": "2026-11-10T03:34:08+00:00",
+        "source_system": "Okta (simulated)",
+        "api_call": "GET /api/v1/users?filter=status eq \"ACTIVE\" + GET /api/v1/users/{id}/factors"
+      }
+    ],
+    "related_tickets": [
+      {
+        "item": "svc-backup@acme.example",
+        "ticket": "IT-881",
+        "type": "Service Account",
+        "status": "Done",
+        "summary": "svc-backup service account created",
+        "expires": null,
+        "expired": false,
+        "suspected_injection": false
+      }
+    ],
+    "injection_tickets": [],
+    "needs_human": true,
+    "human_question": "Is the service account exception for s***@acme.example valid, and does a***@acme.example require immediate MFA remediation?",
+    "exception_refs": [
+      "IT-881"
+    ],
+    "recorded_by": "evidence-bot/local"
+  },
+  "AC-02": {
+    "control_id": "AC-02",
+    "title": "Leavers deprovisioned within 24 hours",
+    "frameworks": [
+      "ISO27001:2022 A.5.18",
+      "SOC2 CC6.2"
+    ],
+    "owner": "it-ops@acme.example",
+    "result": "FAIL",
+    "summary": "Two leavers failed deprovisioning: k***@acme.example was deactivated 64h after termination, and d***@acme.example remains active in Okta. No risk exceptions were found for these cases.",
+    "failing_items": [
+      "karan.singh@acme.example: deactivated 64h after termination",
+      "deepa.nair@acme.example: still ACTIVE in Okta after termination"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "AC-02-630367313a0a",
+        "control_id": "AC-02",
+        "file": "AC-02-630367313a0a.json",
+        "sha256": "630367313a0a29cd11130c9e84e5674370b44b3d50e860bd5f54a727ca900ac3",
+        "collected_at": "2026-11-10T03:35:02+00:00",
+        "source_system": "HRIS + Okta (simulated)",
+        "api_call": "HRIS GET /terminations?since=30d ; Okta GET /api/v1/users?search=profile.email"
+      }
+    ],
+    "related_tickets": [],
+    "injection_tickets": [],
+    "needs_human": true,
+    "human_question": "Are the deprovisioning delays for k***@acme.example (64h after termination) and d***@acme.example (still active) justified by approved exceptions, or do they require immediate remediation?",
+    "exception_refs": [],
+    "recorded_by": "evidence-bot/local"
+  },
+  "AC-03": {
+    "control_id": "AC-03",
+    "title": "Cloud access keys rotated within 90 days",
+    "frameworks": [
+      "ISO27001:2022 A.5.17",
+      "SOC2 CC6.1"
+    ],
+    "owner": "cloud-team@acme.example",
+    "result": "FAIL",
+    "summary": "The data-pipeline access key (AKIASIM000000000002) is active and 220 days old, violating the 90-day maximum for active access keys. No risk exceptions were found for this item.",
+    "failing_items": [
+      "data-pipeline (AKIASIM000000000002): 220 days old"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "AC-03-e0729f475199",
+        "control_id": "AC-03",
+        "file": "AC-03-e0729f475199.json",
+        "sha256": "e0729f4751997786f974ad93875fcd04501cfc267be667219d956b5ef7d46058",
+        "collected_at": "2026-11-10T03:36:26+00:00",
+        "source_system": "AWS IAM (simulated)",
+        "api_call": "aws iam generate-credential-report && aws iam get-credential-report"
+      }
+    ],
+    "related_tickets": [],
+    "injection_tickets": [],
+    "needs_human": true,
+    "human_question": "Is the data-pipeline access key (AKIASIM000000000002) covered by an approved exception, or does it require immediate rotation due to exceeding 90-day active lifespan?",
+    "exception_refs": [],
+    "recorded_by": "evidence-bot/local"
+  },
+  "DP-01": {
+    "control_id": "DP-01",
+    "title": "No unapproved public storage buckets",
+    "frameworks": [
+      "ISO27001:2022 A.8.12",
+      "SOC2 C1.1"
+    ],
+    "owner": "cloud-team@acme.example",
+    "result": "FAIL",
+    "summary": "Two buckets failed public access checks: acme-public-website (public_policy: true) is covered by an approved exception (GRC-112), but acme-tmp-exports (public_policy: true) has an open task ticket (GRC-130) with suspected_injection flag, requiring verification if it qualifies as a valid risk exception.",
+    "failing_items": [
+      "acme-public-website",
+      "acme-tmp-exports"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "DP-01-d350c802e255",
+        "control_id": "DP-01",
+        "file": "DP-01-d350c802e255.json",
+        "sha256": "d350c802e2556c548b32a3e86aa6b1b89388154eb9d726dab724e0e95135fbf1",
+        "collected_at": "2026-11-10T03:37:25+00:00",
+        "source_system": "AWS S3 (simulated)",
+        "api_call": "aws s3api get-public-access-block / get-bucket-policy-status (all buckets)"
+      }
+    ],
+    "related_tickets": [
+      {
+        "item": "acme-public-website",
+        "ticket": "GRC-112",
+        "type": "Risk Exception",
+        "status": "Approved",
+        "summary": "Risk exception: acme-public-website bucket is intentionally public",
+        "expires": "2027-03-31",
+        "expired": false,
+        "suspected_injection": false
+      },
+      {
+        "item": "acme-tmp-exports",
+        "ticket": "GRC-130",
+        "type": "Task",
+        "status": "Open",
+        "summary": "Clean up acme-tmp-exports bucket",
+        "expires": null,
+        "expired": false,
+        "suspected_injection": true
+      }
+    ],
+    "injection_tickets": [
+      "GRC-130"
+    ],
+    "needs_human": true,
+    "human_question": "Is the acme-public-website bucket's public accessibility justified by the approved exception (GRC-112)? Does the acme-tmp-exports bucket require cleanup, given its open task ticket (GRC-130) and suspected_injection flag?",
+    "exception_refs": [
+      "GRC-112"
+    ],
+    "recorded_by": "evidence-bot/local"
+  },
+  "CM-01": {
+    "control_id": "CM-01",
+    "title": "Branch protection on production repositories",
+    "frameworks": [
+      "ISO27001:2022 A.8.32",
+      "SOC2 CC8.1"
+    ],
+    "owner": "eng-leads@acme.example",
+    "result": "PASS",
+    "summary": "All production repositories (acme/payments-api, acme/web-frontend, acme/infra-terraform) meet branch protection requirements: default branches require \u22651 review and block force pushes. No issues detected.",
+    "failing_items": [],
+    "evidence": [
+      {
+        "evidence_id": "CM-01-9ab4fc42cc5e",
+        "control_id": "CM-01",
+        "file": "CM-01-9ab4fc42cc5e.json",
+        "sha256": "9ab4fc42cc5efb012d38b8054a849caa5224955b0a55196049b4b6a66c725497",
+        "collected_at": "2026-11-10T03:39:28+00:00",
+        "source_system": "GitHub (simulated)",
+        "api_call": "GET /repos/{owner}/{repo}/branches/{branch}/protection"
+      }
+    ],
+    "related_tickets": [],
+    "injection_tickets": [],
+    "needs_human": false,
+    "human_question": "",
+    "exception_refs": [],
+    "recorded_by": "evidence-bot/local"
+  }
+}

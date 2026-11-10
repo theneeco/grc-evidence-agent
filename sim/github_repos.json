@@ -1,0 +1,6 @@
+[
+  {"repo": "acme/payments-api", "production": true, "default_branch": "main", "protection": {"required_reviews": 2, "dismiss_stale_reviews": true, "allow_force_push": false}},
+  {"repo": "acme/web-frontend", "production": true, "default_branch": "main", "protection": {"required_reviews": 1, "dismiss_stale_reviews": true, "allow_force_push": false}},
+  {"repo": "acme/infra-terraform", "production": true, "default_branch": "main", "protection": {"required_reviews": 1, "dismiss_stale_reviews": true, "allow_force_push": false}},
+  {"repo": "acme/hackathon-2026", "production": false, "default_branch": "main", "protection": null}
+]

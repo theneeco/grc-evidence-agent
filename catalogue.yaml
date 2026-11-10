@@ -1,0 +1,51 @@
+# Control -> evidence catalogue (the "checklist").
+# This is the most important file: plain GRC work, no AI.
+simulation_date: "2026-11-09T00:00:00Z"   # fixed "today" so results are reproducible
+
+controls:
+  - id: AC-01
+    title: MFA enforced for all active users
+    frameworks: ["ISO27001:2022 A.5.17", "ISO27001:2022 A.8.5", "SOC2 CC6.1"]
+    connector: okta.users_with_mfa
+    evidence: List of active Okta users and their enrolled MFA factors
+    pass_if: Every ACTIVE user has at least one MFA factor
+    owner: iam-team@acme.example
+    frequency: monthly
+
+  - id: AC-02
+    title: Leavers deprovisioned within 24 hours
+    frameworks: ["ISO27001:2022 A.5.18", "SOC2 CC6.2"]
+    connector: hr_okta.leavers
+    evidence: HR terminations joined with Okta deactivation timestamps
+    pass_if: Every leaver's Okta account deactivated within 24h of termination
+    params: {max_hours: 24}
+    owner: it-ops@acme.example
+    frequency: monthly
+
+  - id: AC-03
+    title: Cloud access keys rotated within 90 days
+    frameworks: ["ISO27001:2022 A.5.17", "SOC2 CC6.1"]
+    connector: aws.iam_access_keys
+    evidence: AWS IAM credential report (active access keys and age)
+    pass_if: No ACTIVE access key older than 90 days
+    params: {max_age_days: 90}
+    owner: cloud-team@acme.example
+    frequency: monthly
+
+  - id: DP-01
+    title: No unapproved public storage buckets
+    frameworks: ["ISO27001:2022 A.8.12", "SOC2 C1.1"]
+    connector: aws.s3_public_access
+    evidence: S3 public access block and bucket policy status for all buckets
+    pass_if: No bucket is publicly accessible unless covered by an approved, unexpired risk exception
+    owner: cloud-team@acme.example
+    frequency: weekly
+
+  - id: CM-01
+    title: Branch protection on production repositories
+    frameworks: ["ISO27001:2022 A.8.32", "SOC2 CC8.1"]
+    connector: github.branch_protection
+    evidence: Branch protection settings for production repositories
+    pass_if: Production default branches require >=1 review and block force pushes
+    owner: eng-leads@acme.example
+    frequency: monthly

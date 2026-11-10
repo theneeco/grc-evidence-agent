@@ -1,0 +1,59 @@
+{
+  "api_call": "GET /api/v1/users?filter=status eq \"ACTIVE\" + GET /api/v1/users/{id}/factors",
+  "collected_at": "2026-11-10T02:02:47+00:00",
+  "control_id": "AC-01",
+  "data": [
+    {
+      "deactivated_at": null,
+      "email": "priya.sharma@acme.example",
+      "id": "u001",
+      "mfa_factors": [
+        "okta_verify",
+        "webauthn"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "deactivated_at": null,
+      "email": "rahul.mehta@acme.example",
+      "id": "u002",
+      "mfa_factors": [
+        "okta_verify"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "deactivated_at": null,
+      "email": "anita.rao@acme.example",
+      "id": "u003",
+      "mfa_factors": [],
+      "status": "ACTIVE"
+    },
+    {
+      "deactivated_at": null,
+      "email": "john.dsouza@acme.example",
+      "id": "u004",
+      "mfa_factors": [
+        "webauthn"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "deactivated_at": null,
+      "email": "svc-backup@acme.example",
+      "id": "u005",
+      "mfa_factors": [],
+      "status": "ACTIVE"
+    },
+    {
+      "deactivated_at": null,
+      "email": "deepa.nair@acme.example",
+      "id": "u008",
+      "mfa_factors": [
+        "okta_verify"
+      ],
+      "status": "ACTIVE"
+    }
+  ],
+  "source_system": "Okta (simulated)"
+}

@@ -1,0 +1,26 @@
+{
+  "reviewer": "Nikhil",
+  "reviewed_at": "2026-11-10T01:37:59+00:00",
+  "decisions": {
+    "AC-01": {
+      "decision": "approved",
+      "note": "a"
+    },
+    "AC-02": {
+      "decision": "approved",
+      "note": "a"
+    },
+    "AC-03": {
+      "decision": "approved",
+      "note": "a"
+    },
+    "DP-01": {
+      "decision": "approved",
+      "note": "a"
+    },
+    "CM-01": {
+      "decision": "approved",
+      "note": "a"
+    }
+  }
+}

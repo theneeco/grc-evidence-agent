@@ -1,0 +1,29 @@
+{
+  "api_call": "HRIS GET /terminations?since=30d ; Okta GET /api/v1/users?search=profile.email",
+  "collected_at": "2026-11-10T02:20:47+00:00",
+  "control_id": "AC-02",
+  "data": [
+    {
+      "email": "meera.iyer@acme.example",
+      "employee_id": "E1042",
+      "okta_deactivated_at": "2026-10-02T14:00:00Z",
+      "okta_status": "DEPROVISIONED",
+      "termination_at": "2026-10-02T10:00:00Z"
+    },
+    {
+      "email": "karan.singh@acme.example",
+      "employee_id": "E1077",
+      "okta_deactivated_at": "2026-10-18T09:30:00Z",
+      "okta_status": "DEPROVISIONED",
+      "termination_at": "2026-10-15T17:00:00Z"
+    },
+    {
+      "email": "deepa.nair@acme.example",
+      "employee_id": "E1103",
+      "okta_deactivated_at": null,
+      "okta_status": "ACTIVE",
+      "termination_at": "2026-10-28T12:00:00Z"
+    }
+  ],
+  "source_system": "HRIS + Okta (simulated)"
+}

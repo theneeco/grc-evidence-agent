@@ -1,0 +1,32 @@
+{
+  "api_call": "aws iam generate-credential-report && aws iam get-credential-report",
+  "collected_at": "2026-11-10T03:36:26+00:00",
+  "control_id": "AC-03",
+  "data": [
+    {
+      "access_key_id": "AKIASIM000000000001",
+      "created": "2026-09-20T00:00:00Z",
+      "status": "Active",
+      "user": "ci-deployer"
+    },
+    {
+      "access_key_id": "AKIASIM000000000002",
+      "created": "2026-04-03T00:00:00Z",
+      "status": "Active",
+      "user": "data-pipeline"
+    },
+    {
+      "access_key_id": "AKIASIM000000000003",
+      "created": "2025-01-10T00:00:00Z",
+      "status": "Inactive",
+      "user": "legacy-reporting"
+    },
+    {
+      "access_key_id": "AKIASIM000000000004",
+      "created": "2026-10-30T00:00:00Z",
+      "status": "Active",
+      "user": "terraform"
+    }
+  ],
+  "source_system": "AWS IAM (simulated)"
+}

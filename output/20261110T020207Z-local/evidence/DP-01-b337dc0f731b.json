@@ -1,0 +1,28 @@
+{
+  "api_call": "aws s3api get-public-access-block / get-bucket-policy-status (all buckets)",
+  "collected_at": "2026-11-10T02:06:33+00:00",
+  "control_id": "DP-01",
+  "data": [
+    {
+      "block_public_access": true,
+      "bucket": "acme-prod-customer-data",
+      "public_policy": false
+    },
+    {
+      "block_public_access": false,
+      "bucket": "acme-public-website",
+      "public_policy": true
+    },
+    {
+      "block_public_access": false,
+      "bucket": "acme-tmp-exports",
+      "public_policy": true
+    },
+    {
+      "block_public_access": true,
+      "bucket": "acme-logs-archive",
+      "public_policy": false
+    }
+  ],
+  "source_system": "AWS S3 (simulated)"
+}

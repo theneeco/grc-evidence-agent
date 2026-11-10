@@ -1,0 +1,122 @@
+{
+  "AC-01": {
+    "control_id": "AC-01",
+    "title": "MFA enforced for all active users",
+    "frameworks": [
+      "ISO27001:2022 A.5.17",
+      "ISO27001:2022 A.8.5",
+      "SOC2 CC6.1"
+    ],
+    "owner": "iam-team@acme.example",
+    "result": "FAIL",
+    "summary": "Two active users (a***@acme.example and s***@acme.example) have no MFA factors enrolled. No approved exceptions found in Jira for these accounts.",
+    "failing_items": [
+      "anita.rao@acme.example",
+      "svc-backup@acme.example"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "AC-01-3f0466dcb885",
+        "control_id": "AC-01",
+        "file": "AC-01-3f0466dcb885.json",
+        "sha256": "3f0466dcb885c3c965889706da75da1e97d7d491fa28f6712fa384f069ec048e",
+        "collected_at": "2026-11-10T02:02:47+00:00",
+        "source_system": "Okta (simulated)",
+        "api_call": "GET /api/v1/users?filter=status eq \"ACTIVE\" + GET /api/v1/users/{id}/factors"
+      }
+    ],
+    "needs_human": true,
+    "human_question": "Should these users be enrolled in MFA, or does an unsearched exception exist?",
+    "exception_refs": [],
+    "recorded_by": "evidence-bot/local"
+  },
+  "AC-02": {
+    "control_id": "AC-02",
+    "title": "Leavers deprovisioned within 24 hours",
+    "frameworks": [
+      "ISO27001:2022 A.5.18",
+      "SOC2 CC6.2"
+    ],
+    "owner": "it-ops@acme.example",
+    "result": "FAIL",
+    "summary": "Two leavers (k***@acme.example and d***@acme.example) failed deprovisioning: one was deactivated 64h after termination, another remains ACTIVE. No approved exceptions found in Jira for these cases.",
+    "failing_items": [
+      "karan.singh@acme.example: deactivated 64h after termination",
+      "deepa.nair@acme.example: still ACTIVE in Okta after termination"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "AC-02-521cea90ee29",
+        "control_id": "AC-02",
+        "file": "AC-02-521cea90ee29.json",
+        "sha256": "521cea90ee2950e8945ed87a65cc6238277d101f0de4c793d29c0311e4063a27",
+        "collected_at": "2026-11-10T02:03:51+00:00",
+        "source_system": "HRIS + Okta (simulated)",
+        "api_call": "HRIS GET /terminations?since=30d ; Okta GET /api/v1/users?search=profile.email"
+      }
+    ],
+    "needs_human": true,
+    "human_question": "Should these leavers be deprovisioned, or does an unsearched exception exist?",
+    "exception_refs": [],
+    "recorded_by": "evidence-bot/local"
+  },
+  "AC-03": {
+    "control_id": "AC-03",
+    "title": "Cloud access keys rotated within 90 days",
+    "frameworks": [
+      "ISO27001:2022 A.5.17",
+      "SOC2 CC6.1"
+    ],
+    "owner": "cloud-team@acme.example",
+    "result": "FAIL",
+    "summary": "The data-pipeline access key (AKIASIM000000000002) is 220 days old and still active. No approved exceptions found in Jira for this credential.",
+    "failing_items": [
+      "data-pipeline (AKIASIM000000000002): 220 days old"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "AC-03-a6c7e3fe27ef",
+        "control_id": "AC-03",
+        "file": "AC-03-a6c7e3fe27ef.json",
+        "sha256": "a6c7e3fe27eff95ba45e070f8f31e2e30db6dd4e78cdf2f94a5d3c750ec0e1c4",
+        "collected_at": "2026-11-10T02:05:15+00:00",
+        "source_system": "AWS IAM (simulated)",
+        "api_call": "aws iam generate-credential-report && aws iam get-credential-report"
+      }
+    ],
+    "needs_human": true,
+    "human_question": "Should the data-pipeline access key (AKIASIM000000000002) be rotated, or does an unsearched exception exist?",
+    "exception_refs": [],
+    "recorded_by": "evidence-bot/local"
+  },
+  "DP-01": {
+    "control_id": "DP-01",
+    "title": "No unapproved public storage buckets",
+    "frameworks": [
+      "ISO27001:2022 A.8.12",
+      "SOC2 C1.1"
+    ],
+    "owner": "cloud-team@acme.example",
+    "result": "FAIL",
+    "summary": "Two buckets (acme-public-website, acme-tmp-exports) are publicly accessible without approved risk exceptions. No matching Jira tickets found for these cases.",
+    "failing_items": [
+      "acme-public-website",
+      "acme-tmp-exports"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "DP-01-b337dc0f731b",
+        "control_id": "DP-01",
+        "file": "DP-01-b337dc0f731b.json",
+        "sha256": "b337dc0f731b16d888b5350139d2dc91567bc03022fbb3dcfee7af722b9e2987",
+        "collected_at": "2026-11-10T02:06:33+00:00",
+        "source_system": "AWS S3 (simulated)",
+        "api_call": "aws s3api get-public-access-block / get-bucket-policy-status (all buckets)"
+      }
+    ],
+    "needs_human": true,
+    "human_question": "Should acme-public-website/acme-tmp-exports buckets be publicly accessible, or does an unsearched exception exist?",
+    "exception_refs": [],
+    "recorded_by": "evidence-bot/local"
+  }
+}

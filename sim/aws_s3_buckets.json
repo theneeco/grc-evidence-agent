@@ -1,0 +1,6 @@
+[
+  {"bucket": "acme-prod-customer-data", "block_public_access": true, "public_policy": false},
+  {"bucket": "acme-public-website", "block_public_access": false, "public_policy": true},
+  {"bucket": "acme-tmp-exports", "block_public_access": false, "public_policy": true},
+  {"bucket": "acme-logs-archive", "block_public_access": true, "public_policy": false}
+]

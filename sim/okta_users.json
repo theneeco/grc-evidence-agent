@@ -1,0 +1,10 @@
+[
+  {"id": "u001", "email": "priya.sharma@acme.example", "status": "ACTIVE", "mfa_factors": ["okta_verify", "webauthn"], "deactivated_at": null},
+  {"id": "u002", "email": "rahul.mehta@acme.example", "status": "ACTIVE", "mfa_factors": ["okta_verify"], "deactivated_at": null},
+  {"id": "u003", "email": "anita.rao@acme.example", "status": "ACTIVE", "mfa_factors": [], "deactivated_at": null},
+  {"id": "u004", "email": "john.dsouza@acme.example", "status": "ACTIVE", "mfa_factors": ["webauthn"], "deactivated_at": null},
+  {"id": "u005", "email": "svc-backup@acme.example", "status": "ACTIVE", "mfa_factors": [], "deactivated_at": null},
+  {"id": "u006", "email": "meera.iyer@acme.example", "status": "DEPROVISIONED", "mfa_factors": [], "deactivated_at": "2026-10-02T14:00:00Z"},
+  {"id": "u007", "email": "karan.singh@acme.example", "status": "DEPROVISIONED", "mfa_factors": ["okta_verify"], "deactivated_at": "2026-10-18T09:30:00Z"},
+  {"id": "u008", "email": "deepa.nair@acme.example", "status": "ACTIVE", "mfa_factors": ["okta_verify"], "deactivated_at": null}
+]

@@ -1,0 +1,153 @@
+{
+  "AC-01": {
+    "control_id": "AC-01",
+    "title": "MFA enforced for all active users",
+    "frameworks": [
+      "ISO27001:2022 A.5.17",
+      "ISO27001:2022 A.8.5",
+      "SOC2 CC6.1"
+    ],
+    "owner": "iam-team@acme.example",
+    "result": "FAIL",
+    "summary": "FAIL: 2 of 6 items failed. Possibly relevant tickets: IT-881.",
+    "failing_items": [
+      "anita.rao@acme.example",
+      "svc-backup@acme.example"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "AC-01-364f452edcd4",
+        "control_id": "AC-01",
+        "file": "AC-01-364f452edcd4.json",
+        "sha256": "364f452edcd49781b88f8e6c2b32a8c1d0baf73b293b51c00b10866c714ed9f2",
+        "collected_at": "2026-11-10T01:31:30+00:00",
+        "source_system": "Okta (simulated)",
+        "api_call": "GET /api/v1/users?filter=status eq \"ACTIVE\" + GET /api/v1/users/{id}/factors"
+      }
+    ],
+    "needs_human": true,
+    "human_question": "Do the referenced tickets justify any of the failures?",
+    "exception_refs": [
+      "IT-881"
+    ],
+    "recorded_by": "evidence-bot/scripted"
+  },
+  "AC-02": {
+    "control_id": "AC-02",
+    "title": "Leavers deprovisioned within 24 hours",
+    "frameworks": [
+      "ISO27001:2022 A.5.18",
+      "SOC2 CC6.2"
+    ],
+    "owner": "it-ops@acme.example",
+    "result": "FAIL",
+    "summary": "FAIL: 2 of 3 items failed.",
+    "failing_items": [
+      "karan.singh@acme.example: deactivated 64h after termination",
+      "deepa.nair@acme.example: still ACTIVE in Okta after termination"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "AC-02-b6314bc617b3",
+        "control_id": "AC-02",
+        "file": "AC-02-b6314bc617b3.json",
+        "sha256": "b6314bc617b31b389d1178c8cc4cac921ebd78d833c728dd6c877dc81126311e",
+        "collected_at": "2026-11-10T01:31:30+00:00",
+        "source_system": "HRIS + Okta (simulated)",
+        "api_call": "HRIS GET /terminations?since=30d ; Okta GET /api/v1/users?search=profile.email"
+      }
+    ],
+    "needs_human": false,
+    "human_question": "",
+    "exception_refs": [],
+    "recorded_by": "evidence-bot/scripted"
+  },
+  "AC-03": {
+    "control_id": "AC-03",
+    "title": "Cloud access keys rotated within 90 days",
+    "frameworks": [
+      "ISO27001:2022 A.5.17",
+      "SOC2 CC6.1"
+    ],
+    "owner": "cloud-team@acme.example",
+    "result": "FAIL",
+    "summary": "FAIL: 1 of 4 items failed.",
+    "failing_items": [
+      "data-pipeline (AKIASIM000000000002): 220 days old"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "AC-03-4dfa4b2f1e88",
+        "control_id": "AC-03",
+        "file": "AC-03-4dfa4b2f1e88.json",
+        "sha256": "4dfa4b2f1e88d612b21e7cc9ff840172aad9ae8cff26b54264774aec314363bd",
+        "collected_at": "2026-11-10T01:31:30+00:00",
+        "source_system": "AWS IAM (simulated)",
+        "api_call": "aws iam generate-credential-report && aws iam get-credential-report"
+      }
+    ],
+    "needs_human": false,
+    "human_question": "",
+    "exception_refs": [],
+    "recorded_by": "evidence-bot/scripted"
+  },
+  "DP-01": {
+    "control_id": "DP-01",
+    "title": "No unapproved public storage buckets",
+    "frameworks": [
+      "ISO27001:2022 A.8.12",
+      "SOC2 C1.1"
+    ],
+    "owner": "cloud-team@acme.example",
+    "result": "FAIL",
+    "summary": "FAIL: 2 of 4 items failed. Possibly relevant tickets: GRC-112. Suspected prompt injection found in ticket text; ignored.",
+    "failing_items": [
+      "acme-public-website",
+      "acme-tmp-exports"
+    ],
+    "evidence": [
+      {
+        "evidence_id": "DP-01-1a73e853d83b",
+        "control_id": "DP-01",
+        "file": "DP-01-1a73e853d83b.json",
+        "sha256": "1a73e853d83b5e33349864c49d4c5317c8bc1b823deb1274a42e3fd61bc8f1f8",
+        "collected_at": "2026-11-10T01:31:30+00:00",
+        "source_system": "AWS S3 (simulated)",
+        "api_call": "aws s3api get-public-access-block / get-bucket-policy-status (all buckets)"
+      }
+    ],
+    "needs_human": true,
+    "human_question": "Do the referenced tickets justify any of the failures?",
+    "exception_refs": [
+      "GRC-112"
+    ],
+    "recorded_by": "evidence-bot/scripted"
+  },
+  "CM-01": {
+    "control_id": "CM-01",
+    "title": "Branch protection on production repositories",
+    "frameworks": [
+      "ISO27001:2022 A.8.32",
+      "SOC2 CC8.1"
+    ],
+    "owner": "eng-leads@acme.example",
+    "result": "PASS",
+    "summary": "PASS: 0 of 3 items failed.",
+    "failing_items": [],
+    "evidence": [
+      {
+        "evidence_id": "CM-01-81276faed7c4",
+        "control_id": "CM-01",
+        "file": "CM-01-81276faed7c4.json",
+        "sha256": "81276faed7c44b117dac7297d69dc5bcdc122b5c2abb1619079407e583b60ae8",
+        "collected_at": "2026-11-10T01:31:30+00:00",
+        "source_system": "GitHub (simulated)",
+        "api_call": "GET /repos/{owner}/{repo}/branches/{branch}/protection"
+      }
+    ],
+    "needs_human": false,
+    "human_question": "",
+    "exception_refs": [],
+    "recorded_by": "evidence-bot/scripted"
+  }
+}

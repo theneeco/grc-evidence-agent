@@ -1,0 +1,5 @@
+[
+  {"employee_id": "E1042", "email": "meera.iyer@acme.example", "termination_at": "2026-10-02T10:00:00Z"},
+  {"employee_id": "E1077", "email": "karan.singh@acme.example", "termination_at": "2026-10-15T17:00:00Z"},
+  {"employee_id": "E1103", "email": "deepa.nair@acme.example", "termination_at": "2026-10-28T12:00:00Z"}
+]
